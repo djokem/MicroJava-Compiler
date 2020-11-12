@@ -1,0 +1,64 @@
+INFO  16:36:52,001 - Compiling source file: C:\Users\Malesevic\Desktop\Djordje\PP1\workspaceEclipse\md150399final\test\program.mj
+INFO  16:36:52,042 - #8 program
+INFO  16:36:52,042 - #46 MJProgram
+INFO  16:36:52,042 - #11 const
+INFO  16:36:52,044 - #46 char
+INFO  16:36:52,044 - #46 a
+INFO  16:36:52,045 - #14 =
+INFO  16:36:52,045 - #44 a
+INFO  16:36:52,045 - #13 ;
+INFO  16:36:52,047 - #11 const
+INFO  16:36:52,048 - #46 int
+INFO  16:36:52,048 - #46 b
+INFO  16:36:52,048 - #14 =
+INFO  16:36:52,048 - #43 1
+INFO  16:36:52,048 - #13 ;
+INFO  16:36:52,048 - #11 const
+INFO  16:36:52,049 - #46 boolean
+INFO  16:36:52,049 - #46 x
+INFO  16:36:52,049 - #14 =
+INFO  16:36:52,049 - #45 true
+INFO  16:36:52,049 - #13 ;
+INFO  16:36:52,049 - #9 {
+INFO  16:36:52,049 - #7 void
+INFO  16:36:52,049 - #46 main
+INFO  16:36:52,050 - #17 (
+INFO  16:36:52,050 - #18 )
+INFO  16:36:52,050 - #9 {
+INFO  16:36:52,050 - #46 y
+INFO  16:36:52,051 - #14 =
+INFO  16:36:52,051 - #43 2
+INFO  16:36:52,051 - #13 ;
+INFO  16:36:52,051 - #46 x
+INFO  16:36:52,054 - #14 =
+INFO  16:36:52,054 - #46 y
+INFO  16:36:52,055 - #22 +
+INFO  16:36:52,055 - #43 2
+INFO  16:36:52,056 - #13 ;
+INFO  16:36:52,056 - #46 y
+INFO  16:36:52,056 - #14 =
+INFO  16:36:52,056 - #46 k
+INFO  16:36:52,056 - #17 (
+INFO  16:36:52,056 - #18 )
+INFO  16:36:52,057 - #22 +
+INFO  16:36:52,057 - #43 3
+INFO  16:36:52,057 - #13 ;
+INFO  16:36:52,057 - #6 print
+INFO  16:36:52,057 - #17 (
+INFO  16:36:52,057 - #46 y
+INFO  16:36:52,057 - #18 )
+INFO  16:36:52,057 - #13 ;
+INFO  16:36:52,057 - #10 }
+INFO  16:36:52,058 - #10 }
+ERROR 16:36:52,071 - Nije pronadjen tip boolean u tabeli simbola
+ERROR 16:36:52,072 - Vrednost konstante x nije kompatibilna deklarisanom tipu konstante! na liniji 5
+ERROR 16:36:52,072 - Ime y nije deklarisano! na liniji 14
+ERROR 16:36:52,072 - Nekompatibilni tipovi! na liniji 14
+ERROR 16:36:52,072 - Ime x nije deklarisano! na liniji 15
+ERROR 16:36:52,072 - Ime y nije deklarisano! na liniji 15
+ERROR 16:36:52,072 - Ime y nije deklarisano! na liniji 16
+ERROR 16:36:52,072 - Ime k nije deklarisano! na liniji 16
+ERROR 16:36:52,073 - Ime noObj mora da oznacava globalnu funkciju! na liniji 16
+ERROR 16:36:52,073 - Ime y nije deklarisano! na liniji 17
+ERROR 16:36:52,073 - Tip izraza u naredbi print mora biti int, char ili bool! na liniji 17
+ERROR 16:36:52,073 - Funkcija main mora da ima return iskaz!

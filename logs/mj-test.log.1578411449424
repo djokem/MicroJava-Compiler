@@ -1,0 +1,56 @@
+INFO  16:37:11,639 - Compiling source file: C:\Users\Malesevic\Desktop\Djordje\PP1\workspaceEclipse\md150399final\test\program.mj
+INFO  16:37:12,141 - #8 program
+INFO  16:37:12,142 - #46 MJProgram
+INFO  16:37:12,142 - #46 int
+INFO  16:37:12,153 - #46 x
+INFO  16:37:12,159 - #13 ;
+INFO  16:37:12,159 - #46 int
+INFO  16:37:12,166 - #46 y
+INFO  16:37:12,166 - #13 ;
+INFO  16:37:12,166 - #11 const
+INFO  16:37:12,166 - #46 char
+INFO  16:37:12,166 - #46 a
+INFO  16:37:12,167 - #14 =
+INFO  16:37:12,167 - #44 a
+INFO  16:37:12,167 - #13 ;
+INFO  16:37:12,174 - #11 const
+INFO  16:37:12,180 - #46 int
+INFO  16:37:12,181 - #46 b
+INFO  16:37:12,181 - #14 =
+INFO  16:37:12,181 - #43 1
+INFO  16:37:12,181 - #13 ;
+INFO  16:37:12,181 - #9 {
+INFO  16:37:12,181 - #7 void
+INFO  16:37:12,181 - #46 main
+INFO  16:37:12,181 - #17 (
+INFO  16:37:12,182 - #18 )
+INFO  16:37:12,182 - #9 {
+INFO  16:37:12,187 - #46 y
+INFO  16:37:12,187 - #14 =
+INFO  16:37:12,188 - #43 2
+INFO  16:37:12,188 - #13 ;
+INFO  16:37:12,188 - #46 x
+INFO  16:37:12,188 - #14 =
+INFO  16:37:12,188 - #46 y
+INFO  16:37:12,188 - #22 +
+INFO  16:37:12,188 - #43 2
+INFO  16:37:12,199 - #13 ;
+INFO  16:37:12,200 - #46 y
+INFO  16:37:12,200 - #14 =
+INFO  16:37:12,200 - #46 k
+INFO  16:37:12,200 - #17 (
+INFO  16:37:12,200 - #18 )
+INFO  16:37:12,200 - #22 +
+INFO  16:37:12,200 - #43 3
+INFO  16:37:12,200 - #13 ;
+INFO  16:37:12,200 - #6 print
+INFO  16:37:12,200 - #17 (
+INFO  16:37:12,200 - #46 y
+INFO  16:37:12,201 - #18 )
+INFO  16:37:12,201 - #13 ;
+INFO  16:37:12,201 - #10 }
+INFO  16:37:12,208 - #10 }
+ERROR 16:37:12,256 - Ime k nije deklarisano! na liniji 15
+ERROR 16:37:12,256 - Ime noObj mora da oznacava globalnu funkciju! na liniji 15
+ERROR 16:37:12,256 - Nekompatibilni tipovi! na liniji 15
+ERROR 16:37:12,256 - Funkcija main mora da ima return iskaz!

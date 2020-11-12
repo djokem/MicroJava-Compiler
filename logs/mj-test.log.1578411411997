@@ -1,0 +1,26 @@
+INFO  16:36:08,043 - Compiling source file: C:\Users\Malesevic\Desktop\Djordje\PP1\workspaceEclipse\md150399final\test\program.mj
+INFO  16:36:08,082 - #8 program
+INFO  16:36:08,082 - #46 MJProgram
+INFO  16:36:08,082 - #11 const
+INFO  16:36:08,084 - #46 char
+INFO  16:36:08,084 - #46 a
+INFO  16:36:08,085 - #14 =
+INFO  16:36:08,085 - #44 a
+INFO  16:36:08,085 - #13 ;
+INFO  16:36:08,086 - #11 const
+INFO  16:36:08,087 - #46 int
+INFO  16:36:08,087 - #46 b
+INFO  16:36:08,087 - #14 =
+INFO  16:36:08,087 - #43 1
+INFO  16:36:08,087 - #13 ;
+INFO  16:36:08,087 - #11 const
+INFO  16:36:08,087 - #46 boolean
+INFO  16:36:08,087 - #46 x
+INFO  16:36:08,088 - #14 =
+INFO  16:36:08,088 - #45 true
+INFO  16:36:08,088 - #13 ;
+INFO  16:36:08,089 - #9 {
+INFO  16:36:08,089 - #10 }
+ERROR 16:36:08,106 - Nije pronadjen tip boolean u tabeli simbola
+ERROR 16:36:08,106 - Vrednost konstante x nije kompatibilna deklarisanom tipu konstante! na liniji 5
+ERROR 16:36:08,106 - Greska: Nije pronadjena main metoda tipa void i bez argumenata!

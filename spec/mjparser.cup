@@ -1,0 +1,217 @@
+
+package rs.ac.bg.etf.pp1;
+
+import java_cup.runtime.*;
+import org.apache.log4j.*;
+import rs.ac.bg.etf.pp1.ast.*;
+
+parser code {:
+
+	Logger log = Logger.getLogger(getClass());
+   
+   
+    // slede redefinisani metodi za prijavu gresaka radi izmene teksta poruke
+     
+    public void report_fatal_error(String message, Object info) throws java.lang.Exception {
+      done_parsing();
+      report_error(message, info);
+    }
+  
+    public void syntax_error(Symbol cur_token) {
+        report_error("\nSintaksna greska", cur_token);
+    }
+  
+    public void unrecovered_syntax_error(Symbol cur_token) throws java.lang.Exception {
+        report_fatal_error("Fatalna greska, parsiranje se ne moze nastaviti", cur_token);
+    }
+
+    public void report_error(String message, Object info) {
+    	StringBuilder msg = new StringBuilder(message); 
+    	if (info instanceof Symbol)
+            msg.append (" na liniji ").append(((Symbol)info).left);
+        log.error(msg.toString());
+    }
+
+
+:}
+
+
+scan with {:
+	Symbol s = this.getScanner().next_token();
+	if (s != null && s.value != null) 
+		log.info(s.toString() + " " + s.value.toString());
+	return s;
+:}
+
+terminal OR, CONTINUE, ABSTRACT, READ, PRINT, VOID, PROG, LBRACE, RBRACE, CONST, COMMA, SEMI, EQUAL, LBRACKET, RBRACKET, LPAREN, RPAREN, PLUS_PLUS, MINUS_MINUS, MINUS, PLUS, TIMES, DIV, MOD, NEW; 
+terminal RETURN, CLASS, LESS_EQUAL, GREATER_EQUAL, GREATER, THIS, BREAK, EQUAL_EQUAL, AND, LESS, NOT_EQUAL, DOT, IF, ELSE, EXTENDS, FOR;
+terminal Integer NUM_CONST;
+terminal Character CHAR_CONST;
+terminal Boolean BOOL_CONST; 
+terminal String IDENT;
+
+nonterminal DeclList, MethodDeclList, Decl, ConstDecl, VarDecl;
+nonterminal ConstDeclList, CnstDecl, ConstType, VDecl, VarBrackets, VarDeclList;
+nonterminal StatementList, Statement;
+nonterminal DesignatorStatement, Addop;
+nonterminal  Mulop, MethVarDecl;
+
+nonterminal rs.etf.pp1.symboltable.concepts.Obj ProgName, Program, MethodDecl, MethodTypeName, Designator, ArrayIdent;
+nonterminal rs.etf.pp1.symboltable.concepts.Struct Type, Factor, MulopFactorList, AddOpTermList, Expr, FactorNewExpr,Term;
+
+Program ::= (Program) PROG ProgName DeclList LBRACE MethodDeclList RBRACE;
+
+ProgName ::= (ProgName) IDENT:progName;
+
+DeclList ::= (DeclListNotEmpty) DeclList Decl
+	     |
+	     (DeclListEmpty) /* epsilon */
+	     ;
+
+Decl ::= (DeclConst) ConstDecl
+	 |
+	 (DeclVar) VarDecl
+	 ;
+
+ConstDecl ::= (ConstDecl) CONST Type:constType ConstDeclList SEMI;
+
+ConstDeclList ::= (ConstDeclListMore) CnstDecl COMMA ConstDeclList
+  		  | 
+		  (ConstDeclListOne) CnstDecl
+		  ;
+
+CnstDecl ::= (CnstDecl) IDENT:constName EQUAL ConstType;
+
+ConstType ::= (ConstTypeNum) NUM_CONST:num
+	      |
+	      (ConstTypeChar) CHAR_CONST:c
+	      | 
+	      (ConstTypeBool) BOOL_CONST:b
+	      ;
+
+Type ::= (Type) IDENT:typeName;
+
+
+VarDecl ::= (VarDecl) Type:varType VarDeclList SEMI;
+
+VarDeclList ::= (VarDeclListMore) VDecl COMMA VarDeclList
+		|
+  		(VarDeclListOne)  VDecl
+		;
+
+VDecl ::= (VDeclNoArr) IDENT:varName
+		  |
+		  (VDeclArr) IDENT:varName LBRACKET RBRACKET
+		  ;
+
+
+
+MethodDeclList ::= (MethodDeclListNotEmpty) MethodDecl MethodDeclList
+		   |
+		   (MethodDeclListEmpty) /* epsilon */
+		   ;
+
+
+MethodDecl ::= (MethodDecl) MethodTypeName LPAREN  RPAREN MethVarDecl LBRACE StatementList RBRACE;
+
+MethodTypeName ::= (MethodTypeNameVoid) VOID IDENT:methName
+				   |
+				   (MethodTypeNameNoVoid) Type:methodType IDENT:methName;
+
+MethVarDecl ::= (MethVarDeclNoEmpty) VarDecl
+				|
+				(MethVarDeclEmpty);
+
+
+StatementList ::= (StatementListNotEmpty) Statement StatementList
+		  |
+		  (StatementListEmpty) /*epsilon*/
+		  ;
+
+Statement ::= (StatementDesignator) DesignatorStatement:dsgStmt SEMI
+ 	      |
+	      (StatementRead) READ LPAREN Designator:dsg RPAREN SEMI
+	      |
+	      (StatementPrintNoConst) PRINT LPAREN Expr:printExpression RPAREN SEMI
+	      |
+	      (StatementPrintNumConst) PRINT LPAREN Expr:printExpression COMMA NUM_CONST RPAREN SEMI
+	      |
+		  (StatementReturn) RETURN SEMI /* NIVO B */
+		  |
+		  (StatementReturnExpr) RETURN Expr:retExpr SEMI /* NIVO B */
+	      ;
+
+DesignatorStatement ::= (DesginatorStmtAssign) Designator:dsg EQUAL Expr:expr  /* Drugacije treba zbog errora, vidi kod nje */
+			|
+			(DesginatorStmtFuncCall) Designator:d LPAREN RPAREN
+			|
+			(DesginatorStmtPlusPlus) Designator:dsg PLUS_PLUS
+			|
+			(DesginatorStmtMinusMinus) Designator:dsg MINUS_MINUS
+			;
+
+
+Designator ::= (DesignatorScalar) IDENT:name
+	       |
+   	       (DesignatorArray) ArrayIdent LBRACKET Expr:arrayDsgExpr RBRACKET
+	       ;
+	       
+ArrayIdent ::= (ArrayIdent) IDENT:arrayName ;	       
+
+Expr ::= (ExprWithMinus) MINUS:predznakMinus AddOpTermList
+	 |
+	 (ExprNoMinus) AddOpTermList
+	 ;
+
+
+			   
+
+AddOpTermList ::= (AddOpTermListMore) AddOpTermList Addop Term 
+		  |
+		  (AddOpTermListOne) Term
+		  ;
+
+
+
+Addop ::= (AddopPlus) PLUS
+	  |
+	  (AddopMinus) MINUS
+	  ;
+
+Term ::= (Term) MulopFactorList;
+
+MulopFactorList ::= (MulopFactorListRecursive) MulopFactorList Mulop Factor
+			   		|
+			   		(MulopFactorListOneElem) Factor ;
+
+
+Mulop ::= (MulopTimes) TIMES
+	  |
+	  (MulopDiv) DIV
+	  |
+          (MulopMod) MOD
+	  ;
+
+Factor ::= (FactorNumConst) NUM_CONST:num 
+	   |
+	   (FactorCharConst) CHAR_CONST:c 
+	   |
+	   (FactorExpr) LPAREN Expr RPAREN
+	   |
+	   (FactorBoolConst) BOOL_CONST:b 
+	   |
+	   (FactorNew) NEW Type:newType FactorNewExpr
+	   |
+	   (FactorDesignator) Designator
+	   |
+	   (FactorFuncCallNoParams) Designator:d LPAREN RPAREN
+	   ;
+
+FactorNewExpr ::= (FactorNewExprExists) LBRACKET Expr:factorNewExpr RBRACKET
+		  |
+  		  (FactorNewExprNotExist) /*epsilon*/
+		  ;
+
+
+
+
